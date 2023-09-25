@@ -46,5 +46,33 @@ Oui, même raison que 2.1
 ### 2.3
 Oui, car cette méthode vient de la classe Object et est publique. 
 
+## 3 
+### 3.1
+    java: call to super must be first statement in constructor
+### 3.2
+    java: constructor Point in class be.g60127.td2.Point cannot be applied to given types;
+        required: double,double
+        found:    no arguments
+        reason: actual and formal argument lists differ in length
+Elle sert à hériter du constructeur de la classe Parent : Point
+
+### 3.3
+Non
+
+## 4
+### 4.1
+    constructor of A
+    constructor of B
+    constructor of C
+
+### 4.2
+    constructor of A
+    constructor of B
+
+### 4.4
+Il n'y a qu'un constructeur vide
+
+
+
 
 
