@@ -73,6 +73,20 @@ Non
 Il n'y a qu'un constructeur vide
 
 
+## 5
+### 5.1
+    (0.0, 0.0) - not pinned
+    (1.0, 1.0) - pinned
+### 5.2
+Celle de PinnablePoint 
+### 5.3
+    java: move(double,double) in be.g60127.td2.PinnablePoint cannot override move(double,double) in be.g60127.td2.Point
+    overridden method does not throw java.lang.Exception
+On ne peut pas l'override si celle de Point n'est pas modifié avec Exception
+
+### 5.4
+Non,
+
 
 
 

@@ -5,7 +5,6 @@ public class ColoredPoint extends Point {
 // where AA represents the alpha value
 
     public ColoredPoint(double x, double y, int color) {
-        super(x, y);
         this.color = color;
     }
 
