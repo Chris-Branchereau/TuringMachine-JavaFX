@@ -1,7 +1,7 @@
 # ATLG3 - TD 2
 
-
-## 1.1
+## 1
+### 1.1
 
 
     (3.0, 6.0) - FF0000FF
@@ -10,7 +10,7 @@
 
 
 
-## 1.2
+### 1.2
 
 
     java: cannot find symbol
@@ -22,6 +22,29 @@ non, car simplement, il n'y a pas de fonction getColor() dans Point.
 
 
 
-## 1.3
+### 1.3
 
-non car Point est le parent de ColoredPoint
+non, car Point est le parent de ColoredPoint
+
+### 1.4
+non, car x et y sont private dans la classe parente 
+
+### 1.5
+    java: cyclic inheritance
+
+### 1.6
+    java: cannot inherit from final
+car, on ne peut pas hériter d'une classe final
+
+## 2
+### 2.1
+Oui, car la classe Object est parente à toute classe en java.
+
+### 2.2
+Oui, même raison que 2.1
+
+### 2.3
+Oui, car cette méthode vient de la classe Object et est publique. 
+
+
+
