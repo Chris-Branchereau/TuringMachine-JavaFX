@@ -15,7 +15,7 @@ public class ColoredPoint extends Point {
 
     @Override
     public String toString() {
-        return this.x +" - "+ this.y +" - "+ this.color;
+        return super.toString() + " - " + String.format("%08X", color);
     }
 }
 
