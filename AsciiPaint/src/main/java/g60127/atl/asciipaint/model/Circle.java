@@ -1,6 +1,6 @@
 package g60127.atl.asciipaint.model;
 
-public class Circle extends ColoredShape implements Shape{
+public class Circle extends ColoredShape{
     private Point center;
     private double radius;
 
@@ -11,12 +11,13 @@ public class Circle extends ColoredShape implements Shape{
     }
     @Override
     public boolean isInside(Point p) {
-        return false;
+        return p.distanceTo(center) < radius;
+
     }
 
     @Override
     public void move(double dx, double dy) {
-
+        center.move(dx,dy);
     }
 
 
