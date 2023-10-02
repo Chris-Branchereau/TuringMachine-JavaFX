@@ -13,15 +13,14 @@ public class Rectangle extends ColoredShape {
     }
 
 
-
     @Override
     public boolean isInside(Point p) {
-        return p.getX() > upperLeft.getX() && p.getX() <= upperLeft.getX()+ height && p.getY() > upperLeft.getY() && p.getY() <=  upperLeft.getY()+ width;
+        return p.getX() > upperLeft.getX() && p.getX() <= upperLeft.getX() + height && p.getY() > upperLeft.getY() && p.getY() <= upperLeft.getY() + width;
     }
 
     @Override
     public void move(double dx, double dy) {
-        upperLeft.move(dx,dy);
+        upperLeft.move(dx, dy);
     }
 
 }

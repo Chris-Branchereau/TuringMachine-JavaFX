@@ -1,5 +1,7 @@
 package g60127.atl.asciipaint.model;
 
+import g60127.atl.asciipaint.view.View;
+
 public class AsciiPaint {
     private Drawing drawing = new Drawing();
 
@@ -11,8 +13,14 @@ public class AsciiPaint {
         this.drawing = new Drawing(width, height);
 
     }
-    public void display(){
-        drawing.display();
+
+    public void display() {
+        for (int i = 0; i < drawing.getWidth() + 1; i++) {
+            for (int j = 0; j < drawing.getHeight(); j++) {
+                View.displayShape(drawing.getShapeAt(new Point(i, j)));
+            }
+            View.displayMessages();
+        }
     }
 
     public void newCircle(int x, int y, double radius, char color) {
@@ -24,7 +32,7 @@ public class AsciiPaint {
     }
 
     public void newSquare(int x, int y, double side, char color) {
-        drawing.addShape(new Square(new Point(x,y),side,color));
+        drawing.addShape(new Square(new Point(x, y), side, color));
     }
 
     public String asAscii() {

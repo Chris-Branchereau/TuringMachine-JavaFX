@@ -16,24 +16,7 @@ public class Drawing {
         this.width = width;
         this.height = height;
     }
-    public void display(){
-        for(int i = 0; i < width+1; i++){
-            for (int j = 0; j < height; j++){
-                boolean space = false;
-                for (int f = shapes.size()-1; f >= 0; f--){
-                    if (shapes.get(f).isInside(new Point(i, j))){
-                        System.out.print(shapes.get(f).getColor() + " ");
-                        space = true;
-                        break;
-                    }
-                }
-                if(!space) System.out.print("  ");
 
-            }
-            System.out.println();
-        }
-
-    }
     public void addShape(Shape shape) {
         shapes.add(shape);
     }
