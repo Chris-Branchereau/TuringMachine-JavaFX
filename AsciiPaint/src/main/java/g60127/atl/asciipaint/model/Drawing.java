@@ -1,5 +1,7 @@
 package g60127.atl.asciipaint.model;
 
+import g60127.atl.asciipaint.view.View;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +17,7 @@ public class Drawing {
     public Drawing(int width, int height) {
         this.width = width;
         this.height = height;
+
     }
 
     public void addShape(Shape shape) {
@@ -22,12 +25,26 @@ public class Drawing {
     }
 
     public Shape getShapeAt(Point p) {
-        for (int f = shapes.size()-1; f >= 0; f--){
-            if (shapes.get(f).isInside(p)){
+        for (int f = shapes.size() - 1; f >= 0; f--) {
+            if (shapes.get(f).isInside(p)) {
                 return shapes.get(f);
             }
         }
         return null;
+    }
+
+    public String getShapeList() {
+        String list = "Shapes : ";
+        for (int f = 0; f < shapes.size(); f++) {
+            list += shapes.get(f).getColor() + ", ";
+        }
+        return list;
+    }
+
+    public void move(int index, int x, int y) {
+        if (index >= 0 && index < shapes.size())
+            shapes.get(index).move(x, y);
+        else View.displayMessages("Invalid index");
     }
 
     int getHeight() {

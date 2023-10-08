@@ -31,27 +31,44 @@ public class View {
         System.out.println(message);
         return s.nextLine();
     }
-    public static String readInt(String message) {
+
+    public static int readInt(String message) {
         System.out.println();
         Scanner s = new Scanner(System.in);
-        while (s.hasNextInt())
+        while (!s.hasNextInt()){
+            System.out.println(message);
+            s.next();
+        }
+        return s.nextInt();
+    }
+
+    public static int readInt(String message, int min, int max) {
+        System.out.println();
+        Scanner s = new Scanner(System.in);
         System.out.println(message);
-        return s.nextLine();
+        while (!s.hasNextInt()) {
+            System.out.println(message);
+            s.next();
+        }
+        int n = s.nextInt();
+        while (n < min || n > max) {
+            System.out.println("Enter an integer between " + min + " and " + max);
+            n = readInt(message, min,  max);
+        }
+        return n;
     }
 
     public static void displayHelp() {
         System.out.println();
         System.out.println("AsciiPaint commands:\n" +
-                "- add circle <x> <y> [radius]\n" +
-                "- play line: l <row> <col> <direction> <i1> <i2>...\n" +
-                "- play plic-ploc : m <row1> <col1> <i1> [<row2> <col2> <i2>]...\n" +
-                "- play first : f <direction> <i1> <i2>...\n" +
-                "- pass : p\n" +
-                "- display grid : grid\n" +
-                "- display all commands : help \n" +
-                "- bag size : size\n" +
-                "   i : index in list of tiles (1 - 6) \n" +
-                "   d : direction in l (left), r (right), u (up), d(down)\n");
+                "- add circle <x> <y> <radius> <color>\n" +
+                "- add rectangle <x> <y> <width> <height> <color>\n" +
+                "- add square <x> <y> <side> <color>\n" +
+                "- move [index] <new x> <new y>\n" +
+                "- list : show the list of shapes added\n" +
+                "- show : draw the shapes\n" +
+                "- stop : stop the program\n" +
+                "- help : show this message");
     }
 
 
