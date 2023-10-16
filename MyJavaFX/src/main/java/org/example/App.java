@@ -2,13 +2,16 @@ package org.example;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
+import javafx.event.EventType;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -25,6 +28,14 @@ import javafx.stage.StageStyle;
  * JavaFX App
  */
 public class App extends Application {
+    /* PrintText */
+    private final BorderPane root = new BorderPane();
+    private final HBox btnPanel = new HBox(10);
+    private final Label lblTitle = new Label("Event Handling");
+    private final TextArea txaMsg = new TextArea();
+    private final Button btnInsert = new Button("Insert");
+    private final TextField tfdCharacter = new TextField();
+    private final Button btnQuit = new Button("Quit");
 
     public static void main(String[] args) {
         launch(args);
@@ -209,7 +220,7 @@ public class App extends Application {
 
 
 
-        /* GridPane */
+        /* GridPane
         primaryStage.setTitle("My First JavaFX App");
         GridPane root = new GridPane();
         root.setPadding(new Insets(10));
@@ -243,6 +254,72 @@ public class App extends Application {
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.show();
+        */
+
+
+
+        /* PrintText         */
+        primaryStage.setTitle("Event Handling");
+        root.setPadding(new Insets(10));
+        //−−− Title
+        lblTitle.setFont(Font.font("System", FontWeight.BOLD, 20));
+        lblTitle.setTextFill(Color.DARKGREEN);
+        BorderPane.setAlignment(lblTitle, Pos.CENTER);
+        BorderPane.setMargin(lblTitle, new Insets(0, 0, 10, 0));
+        root.setTop(lblTitle);
+        //−−− Text−Area
+        txaMsg.setWrapText(true);
+        txaMsg.setPrefColumnCount(15);
+        txaMsg.setPrefRowCount(10);
+        root.setCenter(txaMsg);
+        //−−− Button Panel
+        btnPanel.getChildren().add(btnInsert);
+        btnPanel.getChildren().add(tfdCharacter);
+        btnPanel.getChildren().add(btnQuit);
+        btnPanel.setAlignment(Pos.CENTER_RIGHT);
+        btnPanel.setPadding(new Insets(10, 0, 0, 0));
+        root.setBottom(btnPanel);
+        btnInsert.addEventHandler(
+                ActionEvent.ACTION,
+                e -> txaMsg.appendText(tfdCharacter.getText())
+        );
+        Scene scene = new Scene(root);
+        primaryStage.setScene(scene);
+        primaryStage.show();
+
+
+
+
+
+         primaryStage.addEventFilter(MouseEvent.MOUSE_CLICKED,
+               new GraphDisplayHandler("Stage Filter"));
+
+         primaryStage.addEventHandler(MouseEvent.MOUSE_CLICKED,
+               new GraphDisplayHandler("Stage Handler"));
+
+         scene.addEventFilter(MouseEvent.MOUSE_CLICKED,
+               new GraphDisplayHandler("Scene Filter"));
+
+         scene.addEventHandler(MouseEvent.MOUSE_CLICKED,
+               new GraphDisplayHandler("Scene Handler"));
+
+         root.addEventFilter(MouseEvent.MOUSE_CLICKED,
+               new GraphDisplayHandler("BorderPane Filter"));
+
+         root.addEventHandler(MouseEvent.MOUSE_CLICKED,
+               new GraphDisplayHandler("BorderPane Handler"));
+
+         btnInsert.addEventFilter(MouseEvent.MOUSE_CLICKED,
+               new GraphDisplayHandler("Insert Button Filter"));
+
+         btnInsert.addEventHandler(MouseEvent.MOUSE_CLICKED,
+               new GraphDisplayHandler("Insert Button Handler"));
+
+         btnPanel.addEventFilter(MouseEvent.MOUSE_CLICKED,
+               new GraphDisplayHandler("HBox Filter"));
+
+         btnPanel.addEventHandler(MouseEvent.MOUSE_CLICKED,
+                 new GraphDisplayHandler("HBox Handler"));
     }
 
     @Override
