@@ -9,6 +9,7 @@ import java.util.Scanner;
 
 public class View {
 
+    // @pbt don't displayShape but one char (2 chars)
     public static void displayShape(Shape shape) {
         boolean space = false;
         if (shape != null) {

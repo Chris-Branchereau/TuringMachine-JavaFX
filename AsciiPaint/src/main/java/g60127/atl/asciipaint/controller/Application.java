@@ -6,6 +6,8 @@ import g60127.atl.asciipaint.view.View;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+//@pbt si j'ajoute un cercle, je vois un carré
+
 public class Application {
     private static AsciiPaint paint;
     ;
@@ -16,6 +18,7 @@ public class Application {
         int height = View.readInt("Enter a height (between 1 and 199)", 1, 199);
         paint = new AsciiPaint(width, height);
         while (isStarted) {
+            // @pbt pattern can be better…
             String commandPattern = "(add)\s(circle|square)\s(1[0-9][0-9]|[1-9][0-9]|[0-9])\s(1[0-9][0-9]|[1-9][0-9]|[0-9])\s(1[0-9][0-9]|[1-9][0-9]|[0-9])\s(.)"
                     + "|(add)\s(rectangle)\s(1[0-9][0-9]|[1-9][0-9]|[0-9])\s(1[0-9][0-9]|[1-9][0-9]|[0-9])\s(1[0-9][0-9]|[1-9][0-9]|[0-9])\s(1[0-9][0-9]|[1-9][0-9]|[0-9])\s(.)"
                     + "|(move)\s([0-9]|[0-9][0-9])\s(1[0-9][0-9]|[1-9][0-9]|[0-9])\s(1[0-9][0-9]|[1-9][0-9]|[0-9])"
@@ -25,7 +28,9 @@ public class Application {
                     + "|(help)";
 
             Pattern pattern = Pattern.compile(commandPattern);
-            Matcher matcher = pattern.matcher(View.readCommand("Enter a command (enter \"help\" to see all commands) : "));
+            // @pbt please cut long lines
+            Matcher matcher = pattern.matcher(View.readCommand(
+                    "Enter a command (enter \"help\" to see all commands) : "));
 
             if (matcher.find()) {
                 String[] commands = matcher.group(0).split(" ");
@@ -35,7 +40,7 @@ public class Application {
                     case "show" -> paint.display();
                     case "stop" -> isStarted = false;
                     case "add" -> {
-
+                        // @pbt please break lines
                         if (commands[1].equalsIgnoreCase("rectangle")) {
                             paint.newRectangle(Integer.parseInt(commands[2]), Integer.parseInt((commands[3])), Double.parseDouble(commands[4]), Double.parseDouble(commands[5]), commands[6].charAt(0));
                         } else if (commands[1].equalsIgnoreCase("square"))
@@ -46,6 +51,7 @@ public class Application {
                     case "move" -> {
                         paint.move(Integer.parseInt(commands[1]), Integer.parseInt(commands[2]), Integer.parseInt(commands[3]));
                     }
+                    // @pbt don't pass extra lines
 
 
                 }

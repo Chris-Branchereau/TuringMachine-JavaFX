@@ -49,6 +49,7 @@ public class AsciiPaint {
     }
 
     public void move(int index, int x, int y) {
+        // @pbt write always {}
         if (x <= 0 || x > drawing.getWidth() || y <= 0 || y > drawing.getHeight())
             View.displayMessages("Invalid position");
         else
@@ -61,6 +62,6 @@ public class AsciiPaint {
     }
 
     public String asAscii() {
-        return "";
+        return ""; // @pbt ?
     }
 }
