@@ -9,6 +9,11 @@ import javafx.scene.layout.GridPane;
 import java.awt.event.ActionEvent;
 
 public class DataPane extends GridPane {
+    /**
+     * All elements of the data side
+     *
+     * @param view the main view
+     */
     public DataPane(View view) {
         this.setHgap(10);
         this.setVgap(10);

@@ -1,5 +1,8 @@
 package esi.atl.bmr.model;
 
+/**
+ * Class Object used for OO Design Patern
+ */
 public class Person {
     private int size;
     private int weight;
@@ -40,9 +43,6 @@ public class Person {
 
     public void setAge(int age) {
         this.age = age;
-    }
-    public void setMan(boolean man) {
-        isMen = man;
     }
 
     public void setLifeStyle(LifeStyle lifeStyle) {

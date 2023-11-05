@@ -10,6 +10,12 @@ import java.beans.PropertyChangeListener;
 
 public class ResultPane extends GridPane implements PropertyChangeListener {
     private final View view;
+
+    /**
+     * All elements of the result side
+     *
+     * @param view the main view
+     */
     public ResultPane(View view){
         this.view = view;
         this.setHgap(10);
