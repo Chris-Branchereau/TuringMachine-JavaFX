@@ -3,10 +3,13 @@ package esi.atl.bmr.view;
 import esi.atl.bmr.model.LifeStyle;
 import esi.atl.bmr.view.View;
 import javafx.scene.control.Label;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 
+import java.awt.event.ActionEvent;
+
 public class DataPane extends GridPane {
-    public DataPane (View view){
+    public DataPane(View view) {
         this.setHgap(10);
         this.setVgap(10);
         Label datalbl = new Label("Donnée : ");
@@ -24,6 +27,30 @@ public class DataPane extends GridPane {
         view.getWeightTF().setPromptText("Poids en kg");
         view.getAgeTF().setPromptText("Age en années");
 
+
+        //TextField Filter
+        view.getSizeTF().addEventFilter(KeyEvent.KEY_TYPED, e -> {
+                    if (!e.getCharacter().matches("\\d") ||
+                            view.getSizeTF().getText().length() >= 3) {
+                        e.consume();
+                    }
+                }
+        );
+        view.getWeightTF().addEventFilter(KeyEvent.KEY_TYPED, e -> {
+                    if (!e.getCharacter().matches("\\d") ||
+                            view.getWeightTF().getText().length() >= 3) {
+                        e.consume();
+                    }
+                }
+        );
+        view.getAgeTF().addEventFilter(KeyEvent.KEY_TYPED, e -> {
+                    if (!e.getCharacter().matches("\\d") ||
+                            view.getAgeTF().getText().length() >= 3) {
+                        e.consume();
+                    }
+                }
+        );
+
         // ChoiceBox LifeStyle
         view.getLifeStyleCB().getItems().addAll(LifeStyle.values());
         view.getLifeStyleCB().getSelectionModel().select(0);
@@ -36,11 +63,11 @@ public class DataPane extends GridPane {
 
         //add to Data GridPane
         this.add(datalbl, 0, 0);
-        this.add(sizelbl, 0 , 1);
-        this.add(weightlbl, 0 , 2);
-        this.add(agelbl, 0 , 3);
-        this.add(sexelbl, 0 , 4);
-        this.add(lifelbl, 0 , 5);
+        this.add(sizelbl, 0, 1);
+        this.add(weightlbl, 0, 2);
+        this.add(agelbl, 0, 3);
+        this.add(sexelbl, 0, 4);
+        this.add(lifelbl, 0, 5);
 
     }
 }

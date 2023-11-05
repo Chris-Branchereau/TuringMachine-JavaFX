@@ -3,12 +3,15 @@ package esi.atl.bmr.view;
 import esi.atl.bmr.view.View;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-public class ResultPane extends GridPane{
+public class ResultPane extends GridPane implements PropertyChangeListener {
+    private final View view;
     public ResultPane(View view){
+        this.view = view;
         this.setHgap(10);
         this.setVgap(10);
         Label titlelbl = new Label("Résultats");
@@ -29,5 +32,21 @@ public class ResultPane extends GridPane{
         this.add(calories,0,2);
     }
 
-
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        if (evt.getPropertyName().equals("error")){
+            view.getBmrTF().setText("Failed!");
+            view.getBmrTF().setStyle("-fx-text-fill: red;");
+            view.getCaloriesTF().setText("Failed!");
+            view.getCaloriesTF().setStyle("-fx-text-fill: red;");
+        }
+        if (evt.getPropertyName().equals("BMR")){
+            view.getBmrTF().setStyle("-fx-text-fill: black;");
+            view.getBmrTF().setText(Double.toString((Double) evt.getNewValue()));
+        }
+        if (evt.getPropertyName().equals("Calories")){
+            view.getCaloriesTF().setStyle("-fx-text-fill: black;");
+            view.getCaloriesTF().setText(Double.toString((Double) evt.getNewValue()));
+        }
+    }
 }
