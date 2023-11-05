@@ -1,13 +1,8 @@
 package esi.atl.bmr.view;
 
 import esi.atl.bmr.model.LifeStyle;
-import esi.atl.bmr.view.components.DataPane;
-import esi.atl.bmr.view.components.ResultPane;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -21,6 +16,7 @@ public class View {
     private final TextField ageTF = new TextField();
     private final RadioButton sexeFemmeRB = new RadioButton("Femme");
     private final RadioButton sexeHommeRB = new RadioButton("Homme");
+    private final ToggleGroup sexeGroup = new ToggleGroup();
     private final ChoiceBox lifeStyleCB = new ChoiceBox<LifeStyle>();
 
     private final Button calculBmrBTN = new Button("Calcul du BMR");
@@ -47,13 +43,66 @@ public class View {
 
 
 
-        hbox.getChildren().add(datapane);
-        hbox.getChildren().add(resultpane);
-        root.getChildren().add(hbox);
-        root.getChildren().add(calculBmrBTN);
+        hbox.getChildren().addAll(datapane,resultpane);
+        root.getChildren().addAll(hbox,calculBmrBTN);
 
         Scene scene = new Scene(root, 600, 500);
         stage.setScene(scene);
         stage.show();
+    }
+
+    public ToggleGroup getSexeGroup() {
+        return sexeGroup;
+    }
+
+    public TextField getBmrTF() {
+        return bmrTF;
+    }
+
+    public TextField getCaloriesTF() {
+        return caloriesTF;
+    }
+
+    public TextField getSizeTF() {
+        return sizeTF;
+    }
+
+    public TextField getWeightTF() {
+        return weightTF;
+    }
+
+    public TextField getAgeTF() {
+        return ageTF;
+    }
+    public int getCalories() {
+        return Integer.parseInt(caloriesTF.getText());
+    }
+
+    public int getSize() {
+        return Integer.parseInt(sizeTF.getText());
+    }
+
+    public int getWeight() {
+        return Integer.parseInt(weightTF.getText());
+    }
+
+    public int getAge() {
+        return Integer.parseInt(ageTF.getText());
+    }
+
+    public RadioButton getSexeFemmeRB() {
+        return sexeFemmeRB;
+    }
+
+    public RadioButton getSexeHommeRB() {
+        return sexeHommeRB;
+    }
+
+    public ChoiceBox getLifeStyleCB() {
+        return lifeStyleCB;
+    }
+
+    public ResultPane getResultpane() {
+        return resultpane;
     }
 }

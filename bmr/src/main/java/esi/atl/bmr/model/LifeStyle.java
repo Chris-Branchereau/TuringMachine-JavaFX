@@ -15,7 +15,8 @@ public enum LifeStyle {
         return need;
     }
 
-    public String getName() {
+    @Override
+    public String toString() {
         return name;
     }
 }
