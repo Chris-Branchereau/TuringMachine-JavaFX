@@ -1,6 +1,6 @@
 package g60127.atl.asciipaint.model;
 
-public class Rectangle extends ColoredShape {
+public sealed class Rectangle extends ColoredShape permits Square{
     private Point upperLeft;
     private double width;
     private double height;
@@ -15,7 +15,8 @@ public class Rectangle extends ColoredShape {
 
     @Override
     public boolean isInside(Point p) {
-        return p.getX() > upperLeft.getX() && p.getX() <= upperLeft.getX() + width && p.getY() > upperLeft.getY() && p.getY() <= upperLeft.getY() + height;
+        return p.getX() > upperLeft.getX() && p.getX() <= upperLeft.getX() + width
+                && p.getY() > upperLeft.getY() && p.getY() <= upperLeft.getY() + height;
     }
 
     @Override

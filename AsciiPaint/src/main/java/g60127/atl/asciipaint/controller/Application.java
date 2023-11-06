@@ -25,10 +25,11 @@ public class Application {
                     + "|(help)";
 
             Pattern pattern = Pattern.compile(commandPattern);
-            Matcher matcher = pattern.matcher(View.readCommand("Enter a command (enter \"help\" to see all commands) : "));
+            Matcher matcher = pattern.matcher(View.readCommand(
+                    "Enter a command (enter \"help\" to see all commands) : "));
 
             if (matcher.find()) {
-                String[] commands = matcher.group(0).split(" ");
+                String[] commands = matcher.group(0).split("\s");
                 switch (commands[0]) {
                     case "help" -> View.displayHelp();
                     case "list" -> View.displayMessages(paint.getList());
@@ -37,14 +38,28 @@ public class Application {
                     case "add" -> {
 
                         if (commands[1].equalsIgnoreCase("rectangle")) {
-                            paint.newRectangle(Integer.parseInt(commands[2]), Integer.parseInt((commands[3])), Double.parseDouble(commands[4]), Double.parseDouble(commands[5]), commands[6].charAt(0));
+                            paint.newRectangle(Integer.parseInt(commands[2]),
+                                    Integer.parseInt((commands[3])),
+                                    Double.parseDouble(commands[4]),
+                                    Double.parseDouble(commands[5]),
+                                    commands[6].charAt(0));
+
                         } else if (commands[1].equalsIgnoreCase("square"))
-                            paint.newSquare(Integer.parseInt(commands[2]), Integer.parseInt((commands[3])), Double.parseDouble(commands[4]), commands[5].charAt(0));
+                            paint.newSquare(Integer.parseInt(commands[2]),
+                                    Integer.parseInt((commands[3])),
+                                    Double.parseDouble(commands[4]),
+                                    commands[5].charAt(0));
+
                         else if (commands[1].equalsIgnoreCase("circle"))
-                            paint.newCircle(Integer.parseInt(commands[2]), Integer.parseInt((commands[3])), Double.parseDouble(commands[4]), commands[5].charAt(0));
+                            paint.newCircle(Integer.parseInt(commands[2]),
+                                    Integer.parseInt((commands[3])),
+                                    Double.parseDouble(commands[4]),
+                                    commands[5].charAt(0));
                     }
                     case "move" -> {
-                        paint.move(Integer.parseInt(commands[1]), Integer.parseInt(commands[2]), Integer.parseInt(commands[3]));
+                        paint.move(Integer.parseInt(commands[1]),
+                                Integer.parseInt(commands[2]),
+                                Integer.parseInt(commands[3]));
                     }
 
 
