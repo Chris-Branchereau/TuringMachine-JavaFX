@@ -36,7 +36,8 @@ public class Application {
                             + "|(redo)"
                             + "|(delete)\s(1[0-9][0-9]|[1-9][0-9]|[0-9])"
                             + "|(color)\s(1[0-9][0-9]|[1-9][0-9]|[0-9])\s(.)"
-                            + "|(group)\s((1[0-9][0-9]|[1-9][0-9]|[0-9])\s)+(1[0-9][0-9]|[1-9][0-9]|[0-9])";
+                            + "|(group)\s((1[0-9][0-9]|[1-9][0-9]|[0-9])\s)+(1[0-9][0-9]|[1-9][0-9]|[0-9])"
+                            + "|(ungroup)\s(1[0-9][0-9]|[1-9][0-9]|[0-9])";
 
             Pattern pattern = Pattern.compile(commandPattern);
             Matcher matcher = pattern.matcher(View.readCommand(

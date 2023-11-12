@@ -67,7 +67,13 @@ public class View {
                 "- move [index] <new x> <new y>\n" +
                 "- list : show the list of shapes added\n" +
                 "- show : draw the shapes\n" +
-                "- stop : stop the program\n" +
+                "- exit : stop the program\n" +
+                "- group [indexes...] : group all indexes \n" +
+                "- UnGroup [Group Index] : ungroup a group\n" +
+                "- undo : restore the previous commands\n" +
+                "- redo : undo the undo\n" +
+                "- delete [index]: delete a shape\n" +
+                "- color : change the color of a shape\n" +
                 "- help : show this message");
     }
 

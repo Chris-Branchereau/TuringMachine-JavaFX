@@ -16,7 +16,7 @@ public class UnGroupCommand extends AsciiPaintCommand{
 
     @Override
     public void undo() {
-        
+
 
     }
 
