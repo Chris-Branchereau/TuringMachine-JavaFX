@@ -8,8 +8,8 @@ public class Point {
         this.y = y;
     }
     public Point(Point p){
-        p.x = this.x;
-        p.y = this.y;
+        this.x = p.x;
+        this.y = p.y;
     }
     public void move(double dx, double dy){
         this.x = dx;

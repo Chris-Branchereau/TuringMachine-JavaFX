@@ -14,4 +14,9 @@ public final class ShapeComposite  extends ColoredShape{
     public void move(double dx, double dy) {
 
     }
+
+    @Override
+    public Point getPoint() {
+        return null;
+    }
 }

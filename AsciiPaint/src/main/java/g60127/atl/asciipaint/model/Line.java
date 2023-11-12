@@ -12,28 +12,25 @@ public final class Line extends ColoredShape {
 
     @Override
     public boolean isInside(Point p) {
-        boolean isInsideX;
-        boolean isInsideY;
-        if (firstPoint.getX() < secondPoint.getX()) {
-            isInsideX = p.getX() >= firstPoint.getX()
-                    && p.getX() <= secondPoint.getX();
-
-        } else {
-            isInsideX = p.getX() <= firstPoint.getX()
-                    && p.getX() >= secondPoint.getX();
-        }
-        if (firstPoint.getY() < secondPoint.getY()){
-            isInsideY = p.getY() >= firstPoint.getY()
-                    && p.getY() <= secondPoint.getY();
-        } else {
-            isInsideY = p.getY() <= firstPoint.getY()
-                    && p.getY() >= secondPoint.getY();
-        }
-        return isInsideX && isInsideY;
+        double m = (secondPoint.getY() - firstPoint.getY())
+                / (secondPoint.getX() - firstPoint.getX());
+        return (Math.abs(m * p.getX() - p.getY() - m * firstPoint.getX()
+                + firstPoint.getY())) / Math.sqrt(Math.pow(m, 2) + 1) < 0.5;
     }
 
     @Override
     public void move(double dx, double dy) {
 
+        double x = dx - firstPoint.getX();
+        double y =  dy - firstPoint.getY();
+        double x1 = dx - secondPoint.getX();
+        double y1 = dy - secondPoint.getY();
+        firstPoint.move(firstPoint.getX() + x, firstPoint.getY() + y);
+        secondPoint.move(secondPoint.getX() + x1, secondPoint.getY() + y1);
+    }
+
+    @Override
+    public Point getPoint() {
+        return new Point(firstPoint);
     }
 }

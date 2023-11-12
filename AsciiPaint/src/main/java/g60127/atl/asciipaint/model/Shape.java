@@ -5,4 +5,5 @@ public interface Shape {
     void move(double dx, double dy);
     char getColor();
     void setColor(char color);
+    Point getPoint();
 }

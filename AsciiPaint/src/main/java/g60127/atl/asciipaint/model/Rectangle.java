@@ -1,6 +1,6 @@
 package g60127.atl.asciipaint.model;
 
-public sealed class Rectangle extends ColoredShape permits Square{
+public  class Rectangle extends ColoredShape /*permits Square*/{
     private Point upperLeft;
     private double width;
     private double height;
@@ -24,4 +24,8 @@ public sealed class Rectangle extends ColoredShape permits Square{
         upperLeft.move(dx, dy);
     }
 
+    @Override
+    public Point getPoint() {
+        return new Point(upperLeft);
+    }
 }

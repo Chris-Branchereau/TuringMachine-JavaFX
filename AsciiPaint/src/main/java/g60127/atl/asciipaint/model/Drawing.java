@@ -23,6 +23,9 @@ public class Drawing {
     public void addShape(Shape shape) {
         shapes.add(shape);
     }
+    public void addShape(Shape shape, int index) {
+        shapes.add(index, shape);
+    }
 
     public Shape getShapeAt(Point p) {
         for (int f = shapes.size() - 1; f >= 0; f--) {
@@ -45,6 +48,20 @@ public class Drawing {
         if (index >= 0 && index < shapes.size())
             shapes.get(index).move(x, y);
         else View.displayMessages("Invalid index");
+    }
+    public void deleteShape(int index){
+        shapes.remove(index);
+    }
+    public Shape getShape(int index){
+        if (index >= 0 && index< shapes.size() ) {
+            return shapes.get(index);
+        }
+        else {
+            return null;
+        }
+    }
+    public int getShapesSize(){
+        return shapes.size();
     }
 
     int getHeight() {

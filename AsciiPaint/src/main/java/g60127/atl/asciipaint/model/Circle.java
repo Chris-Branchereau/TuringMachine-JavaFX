@@ -20,5 +20,8 @@ public final class Circle extends ColoredShape{
         center.move(dx,dy);
     }
 
-
+    @Override
+    public Point getPoint() {
+        return new Point(center);
+    }
 }
