@@ -1,8 +1,6 @@
 package g60127.atl.asciipaint.controller;
 
-import g60127.atl.asciipaint.commands.Command;
-import g60127.atl.asciipaint.commands.DeleteCommand;
-import g60127.atl.asciipaint.commands.MoveCommand;
+import g60127.atl.asciipaint.commands.*;
 import g60127.atl.asciipaint.commands.adds.AddCircleCommand;
 import g60127.atl.asciipaint.commands.adds.AddLineCommand;
 import g60127.atl.asciipaint.commands.adds.AddRectangleCommand;
@@ -32,11 +30,13 @@ public class Application {
                             + "|(move)\s([0-9]|[0-9][0-9])\s(1[0-9][0-9]|[1-9][0-9]|[0-9])\s(1[0-9][0-9]|[1-9][0-9]|[0-9])"
                             + "|(show)"
                             + "|(list)"
-                            + "|(stop)"
+                            + "|(exit)"
                             + "|(help)"
                             + "|(undo)"
                             + "|(redo)"
-                            + "|(delete)\s(1[0-9][0-9]|[1-9][0-9]|[0-9])";
+                            + "|(delete)\s(1[0-9][0-9]|[1-9][0-9]|[0-9])"
+                            + "|(color)\s(1[0-9][0-9]|[1-9][0-9]|[0-9])\s(.)"
+                            + "|(group)\s((1[0-9][0-9]|[1-9][0-9]|[0-9])\s)+(1[0-9][0-9]|[1-9][0-9]|[0-9])";
 
             Pattern pattern = Pattern.compile(commandPattern);
             Matcher matcher = pattern.matcher(View.readCommand(
@@ -48,7 +48,7 @@ public class Application {
                     case "help" -> View.displayHelp();
                     case "list" -> View.displayMessages(paint.getList());
                     case "show" -> paint.display();
-                    case "stop" -> isStarted = false;
+                    case "exit" -> isStarted = false;
                     case "add" -> {
 
                         if (commands[1].equalsIgnoreCase("rectangle")) {
@@ -81,19 +81,30 @@ public class Application {
 
                         }
                     }
-                    case "move" -> executeCommand( new MoveCommand(paint,
+                    case "move" -> executeCommand(new MoveCommand(paint,
                             Integer.parseInt(commands[1]),
                             Integer.parseInt(commands[2]),
                             Integer.parseInt(commands[3])));
                     case "undo" -> {
                         undoCommand();
                     }
-                    case "redo" ->{
+                    case "redo" -> {
                         redoCommand();
                     }
-                    case "delete" ->{
+                    case "delete" -> {
                         executeCommand(new DeleteCommand(paint,
                                 Integer.parseInt(commands[1])));
+                    }
+                    case "color" -> {
+                        executeCommand(new ColorCommand(paint,
+                                Integer.parseInt(commands[1]),
+                                commands[2].charAt(0)));
+                    }
+                    case "group" -> {
+                        executeCommand(new GroupCommand(paint, getIndexes(commands)));
+                    }
+                    case "ungroup" -> {
+                        executeCommand(new UnGroupCommand(paint,  Integer.parseInt(commands[1])));
                     }
 
 
@@ -106,29 +117,38 @@ public class Application {
     }
 
     private static void executeCommand(Command command) {
-        for (int i = history.size()-actualUndoCommand;i< history.size() ;i++){
+        for (int i = history.size() - actualUndoCommand; i < history.size(); i++) {
             history.remove(i);
         }
-        actualUndoCommand =0;
+        actualUndoCommand = 0;
         history.add(command);
         command.execute();
     }
-    private static void undoCommand(){
-        if (actualUndoCommand < history.size() ){
+
+    private static void undoCommand() {
+        if (actualUndoCommand < history.size()) {
             actualUndoCommand++;
-            Command toUndo = history.get(history.size()-actualUndoCommand);
+            Command toUndo = history.get(history.size() - actualUndoCommand);
             toUndo.undo();
         } else {
             View.displayMessages("0 undo found");
         }
     }
-    private static void redoCommand(){
-        if (actualUndoCommand > 0 ){
-            Command toRedo = history.get(history.size()-actualUndoCommand);
+
+    private static int[] getIndexes(String[] commands) {
+        int[] indexes = new int[commands.length - 1];
+        for (int i = 0; i < indexes.length; i++) {
+            indexes[i] = Integer.parseInt(commands[i + 1]);
+        }
+        return indexes;
+    }
+
+    private static void redoCommand() {
+        if (actualUndoCommand > 0) {
+            Command toRedo = history.get(history.size() - actualUndoCommand);
             toRedo.redo();
             actualUndoCommand--;
-        }
-        else {
+        } else {
             View.displayMessages("0 redo found");
         }
     }

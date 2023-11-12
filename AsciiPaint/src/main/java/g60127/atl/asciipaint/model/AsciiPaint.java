@@ -69,6 +69,21 @@ public class AsciiPaint {
         }
     }
 
+    public void newGroup(Shape[] shapes){
+        drawing.addShape(new ShapeComposite(shapes));
+    }
+    public void unGroup(int index){
+        try{
+            ShapeComposite shape = (ShapeComposite) getShape(index);
+            for (Shape shape1 : shape.getComponents())
+            drawing.addShape(shape1);
+            drawing.deleteShape(index);
+        } catch (Exception e){
+            View.displayMessages("Not a group");
+        }
+
+    }
+
     public void move(int index, int x, int y) {
         if (x <= 0 || x > drawing.getWidth() || y <= 0 || y > drawing.getHeight())
             View.displayMessages("Invalid position");
