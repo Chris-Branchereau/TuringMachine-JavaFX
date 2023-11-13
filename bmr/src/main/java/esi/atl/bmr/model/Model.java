@@ -54,6 +54,8 @@ public class Model {
         pcs.firePropertyChange("lifestyle", person.getLifeStyle(), lifeStyle);
         person.setLifeStyle(lifeStyle);
 
+        // @pbt there are 0 raison to notify above values
+
         pcs.firePropertyChange("BMR", oldBMR, getBMR());
         pcs.firePropertyChange("Calories", oldCalories, getCalories());
     }
@@ -63,6 +65,7 @@ public class Model {
      *
      * @return the BMR
      */
+    // @pbt no reason to have public getter if you notify change
     public double getBMR() {
         return getBMR(person.getSize(), person.getWeight(), person.getAge(), person.isMen());
     }

@@ -160,6 +160,7 @@ public class View {
      *
      * @return the TextField Age
      */
+    // @pbt encapsulation. don't present getter for textfield
     public TextField getAgeTF() {
         return ageTF;
     }
