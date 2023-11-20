@@ -142,9 +142,34 @@ Il va falloir redimensionné les éléments nous même s'ils dépassent la taill
 ## Question 7
 
 
-# ATLG3 - TD4
+# ATLG3 - TD5
 
+## Question 1
+    java: incompatible types: java.lang.Double cannot be converted to java.lang.Integer
 
+## Question 2
+    'Integer(int)' is deprecated and marked for removal 
+
+## Question 3
+Non
+
+## Question 4
+    java: incompatible types: be.g60127.td5.Box<java.lang.Integer> cannot be converted to be.g60127.td5.Box<java.lang.Object>
+
+## Question 5
+    java: incompatible types: java.lang.Double cannot be converted to java.lang.Integer
+
+## Question 6
+    java: incompatible types: java.lang.Integer cannot be converted to capture#1 of ?
+
+## Question 7
+    java: cannot find symbol
+    symbol:   method compareTo(T)
+    location: variable first of type T
+
+## Question 8
+    java: type argument java.lang.Number is not within bounds of type-variable T
+Car Number n'implémente pas Comparable
 
 
 
