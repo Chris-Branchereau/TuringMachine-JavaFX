@@ -15,7 +15,7 @@ import java.util.regex.Pattern;
 
 public class Application {
     private static AsciiPaint paint;
-    private static final List<Command> history = new ArrayList<Command>();
+    private static  List<Command> history = new ArrayList<Command>();
     private static int actualUndoCommand = 0;
     private static boolean isStarted = true;
 
@@ -24,6 +24,7 @@ public class Application {
         int height = View.readInt("Enter a height (between 1 and 199)", 1, 199);
         paint = new AsciiPaint(width, height);
         while (isStarted) {
+            // @pbt good pattern. next step ; use text blocks
             String commandPattern =
                     "(add)\s(circle|square)\s((1[0-9][0-9]|[1-9][0-9]|[0-9])\s){3}(.)"
                             + "|(add)\s(rectangle|line)\s((1[0-9][0-9]|[1-9][0-9]|[0-9])\s){4}(.)"
@@ -51,6 +52,9 @@ public class Application {
                     case "show" -> paint.display();
                     case "exit" -> isStarted = false;
                     case "add" -> {
+
+                        // @pbt addcommand add a shape. no need of
+                        //  add<type>command
 
                         if (commands[1].equalsIgnoreCase("rectangle")) {
                             executeCommand(new AddRectangleCommand(paint,
@@ -118,9 +122,13 @@ public class Application {
     }
 
     private static void executeCommand(Command command) {
-        for (int i = history.size() - actualUndoCommand; i < history.size(); i++) {
-            history.remove(i);
-        }
+        // @pbt it's much easier and more understandable to use 2 stacks
+        // @pbt you can use sublist too
+        history = history.subList(0, actualUndoCommand);
+       // for (int i = history.size() - actualUndoCommand; i < history.size()
+        // ; i++) {
+       //     history.remove(i);
+       // }
         actualUndoCommand = 0;
         history.add(command);
         command.execute();
