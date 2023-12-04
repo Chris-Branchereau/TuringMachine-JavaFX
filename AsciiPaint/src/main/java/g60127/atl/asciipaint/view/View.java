@@ -64,12 +64,13 @@ public class View {
                 "- add circle <x> <y> <radius> <color>\n" +
                 "- add rectangle <x> <y> <width> <height> <color>\n" +
                 "- add square <x> <y> <side> <color>\n" +
+                "- add line <x> <y> <x1> <y1> <color>\n" +
                 "- move [index] <new x> <new y>\n" +
                 "- list : show the list of shapes added\n" +
                 "- show : draw the shapes\n" +
                 "- exit : stop the program\n" +
                 "- group [indexes...] : group all indexes \n" +
-                "- UnGroup [Group Index] : ungroup a group\n" +
+                "- ungroup [Group Index] : ungroup a group\n" +
                 "- undo : restore the previous commands\n" +
                 "- redo : undo the undo\n" +
                 "- delete [index]: delete a shape\n" +
