@@ -1,31 +1,52 @@
 package esi.atl.turingmachine.model.validators;
 
-public class ValidatorCount implements Validator {
+import esi.atl.turingmachine.model.Code;
+import esi.atl.turingmachine.model.TuringException;
+
+public class ValidatorCount extends ValidatorBool {
+
+    public ValidatorCount(int number) {
+        super(number);
+    }
     @Override
-    public boolean check(int number, int code, int code1) {
+    public boolean validate(Code secretCode, Code testCode) {
         int counter = 0;
         int counter1 = 0;
         switch (number) {
-            default:
+
             case 8: {
                 for (int i = 0; i < 3; i++){
-                    if (Integer.toString(code).charAt(i) == 1) counter++;
-                    if (Integer.toString(code1).charAt(i) == 1) counter1++;
+                    if (secretCode.getIntPos(i) == 1) counter++;
+                    if (testCode.getIntPos(i) == 1) counter1++;
                 }
+                break;
             }
             case 9: {
                 for (int i = 0; i < 3; i++){
-                    if (Integer.toString(code).charAt(i) == 3) counter++;
-                    if (Integer.toString(code1).charAt(i) == 3) counter1++;
+                    if (secretCode.getIntPos(i) == 3) counter++;
+                    if (testCode.getIntPos(i) == 3) counter1++;
                 }
+                break;
             }
             case 10: {
                 for (int i = 0; i < 3; i++){
-                    if (Integer.toString(code).charAt(i) == 4) counter++;
-                    if (Integer.toString(code1).charAt(i) == 4) counter1++;
+                    if (secretCode.getIntPos(i) == 4) counter++;
+                    if (testCode.getIntPos(i) == 4) counter1++;
                 }
+                break;
             }
-
+            case 20 : {
+                for (int i = 0; i < 3; i++){
+                    for (int j = i+1; j < 3; j++){
+                        if (secretCode.getIntPos(i) == secretCode.getIntPos(j)) counter++;
+                        if (testCode.getIntPos(i) == testCode.getIntPos(j)) counter1++;
+                    }
+                }
+                break;
+            }
+            default : {
+                throw new TuringException("Invalid Number Validator" + number);
+            }
         }
         return counter == counter1;
     }

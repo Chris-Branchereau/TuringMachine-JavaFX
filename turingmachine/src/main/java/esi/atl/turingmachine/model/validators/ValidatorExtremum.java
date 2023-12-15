@@ -1,28 +1,54 @@
 package esi.atl.turingmachine.model.validators;
 
-public class ValidatorExtremum implements Validator{
+import esi.atl.turingmachine.model.Code;
+import esi.atl.turingmachine.model.TuringException;
+
+public class ValidatorExtremum extends ValidatorBool{
+
+
+    public ValidatorExtremum(int number) {
+        super(number);
+
+    }
     @Override
-    public boolean check(int number, int code, int code1) {
-        int first = Integer.toString(code).charAt(0);
-        int second = Integer.toString(code).charAt(1);
-        int third = Integer.toString(code).charAt(2);
+    public boolean validate(Code secretCode, Code testCode) {
 
-        int first1 = Integer.toString(code1).charAt(0);
-        int second1 = Integer.toString(code1).charAt(1);
-        int third1 = Integer.toString(code1).charAt(2);
         switch (number){
-
-            case 1 -> {
-
+            case 14 : {
+                return min(secretCode) == min(testCode);
             }
-
-
-
+            case 15 : {
+                return max(secretCode) == max(testCode);
+            }
+            default : {
+                throw new TuringException("Invalid Number Validator" + number);
+            }
         }
     }
-    private int extremum(){
+    private int min(Code code){
+        int min = 6;
+        int index = -1;
         for (int i = 0; i <3; i++){
-
+            if (code.getIntPos(i)>=min){
+                index = -1;
+            } else {
+               min = code.getIntPos(i);
+               index = i;
+            }
         }
+        return index;
+    }
+    private int max(Code code){
+        int max = 6;
+        int index = -1;
+        for (int i = 0; i <3; i++){
+            if (code.getIntPos(i)<=max){
+                index = -1;
+            } else {
+                max = code.getIntPos(i);
+                index = i;
+            }
+        }
+        return index;
     }
 }

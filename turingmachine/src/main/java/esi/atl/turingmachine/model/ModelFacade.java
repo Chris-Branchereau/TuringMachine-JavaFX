@@ -1,27 +1,138 @@
 package esi.atl.turingmachine.model;
 
+import esi.atl.turingmachine.commands.Command;
+import esi.atl.turingmachine.model.validators.Validator;
+import esi.atl.turingmachine.view.ViewConsole;
+
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 public class ModelFacade {
+    private static List<Command> history = new ArrayList<Command>();
+    private static int actualUndoCommand = 0;
+    private List<Problem> problems = new ArrayList<Problem>();
+    private Problem currentProblem;
+
+    private Game game;
+
+    public ModelFacade() {
+        createKnownProblem();
+    }
 
     public void startGame() {
-        //choose a known problem
-        //or random
-
+        game = new Game(currentProblem.getCode(), currentProblem.getValidatorNB());
     }
+
+    public void chooseProblem(int number) {
+        if (number == 0) number = (0 + (int) (Math.random() * ((15 - 0) + 1)));
+        currentProblem = problems.get(number);
+    }
+
+    public List<Problem> getProblems() {
+        return problems;
+    }
+
+    public List<Validator> getValidator() {
+        return game.getValidators();
+    }
+
+    public void setCode(int code) {
+        game.setCode(new Code(code));
+    }
+
+    public void nextRound() {
+        game.nextRound();
+    }
+
     // return validator
-    public void askValidator(){
+    public void selectValidator(int i) {
+        if (game.getCode() == null || game.getCode().getCode() == 000)
+            throw new TuringException("You must enter a code before");
+        if (i >= game.getValidators().size() || i < 0)
+            throw new TuringException("Invalid index Validator");
+        game.selectValidator(i);
+    }
+    public void removeLastValidator(){
+        game.removeLastValidator();
+    }
+    public void guessCode() {
 
     }
-    public void guessCode(int code){
+
+    public void giveUp() {
 
     }
-    public void pass() {
+
+
+    public static void executeCommand(Command command) {
+        try {
+            history = history.subList(0, actualUndoCommand);
+            actualUndoCommand = 0;
+            history.add(command);
+            command.execute();
+        } catch (TuringException e) {
+            ViewConsole.displayError(e.getMessage());
+        }
+    }
+
+    public static void undoCommand() {
+        try {
+            if (actualUndoCommand < history.size()) {
+                actualUndoCommand++;
+                Command toUndo = history.get(history.size() - actualUndoCommand);
+                toUndo.undo();
+            } else {
+                ViewConsole.displayMessages("0 undo found");
+            }
+        } catch (
+                TuringException e) {
+            ViewConsole.displayError(e.getMessage());
+        }
 
     }
 
-    public void undo(){
-
+    public static void redoCommand() {
+        try {
+            if (actualUndoCommand > 0) {
+                Command toRedo = history.get(history.size() - actualUndoCommand);
+                toRedo.redo();
+                actualUndoCommand--;
+            } else {
+                ViewConsole.displayMessages("0 redo found");
+            }
+        } catch (TuringException e) {
+            ViewConsole.displayError(e.getMessage());
+        }
     }
-    public void redo(){
 
+    /**
+     * Create a list of Problem from the file known_problems.csv
+     */
+    private void createKnownProblem() {
+        InputStream is = getClass().getClassLoader().getResourceAsStream("known_problems.csv");
+        InputStreamReader isr = new InputStreamReader(is);
+        BufferedReader br = new BufferedReader(isr);
+        String line;
+        List<String> lines = new ArrayList<>();
+        try {
+            while ((line = br.readLine()) != null) {
+                lines.add(line);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        for (int i = 1; i < lines.size(); i++) {
+            String[] args = lines.get(i).split(",");
+            int[] validators = new int[args.length - 4];
+            for (int j = 0; j < validators.length; j++) {
+                validators[j] = Integer.parseInt(args[j + 4]);
+            }
+            problems.add(new Problem(Integer.parseInt(args[0]),
+                    Integer.parseInt(args[1]),
+                    Integer.parseInt(args[2]),
+                    new Code(Integer.parseInt(args[3])), validators));
+        }
     }
 }

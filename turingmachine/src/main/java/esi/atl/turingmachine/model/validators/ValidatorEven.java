@@ -1,29 +1,34 @@
 package esi.atl.turingmachine.model.validators;
 
-public class ValidatorEven implements Validator{
-    @Override
-    public boolean check(int number, int code, int code1) {
-        int first = Integer.toString(code).charAt(0);
-        int second = Integer.toString(code).charAt(1);
-        int third = Integer.toString(code).charAt(2);
+import esi.atl.turingmachine.model.Code;
+import esi.atl.turingmachine.model.TuringException;
 
-        int first1 = Integer.toString(code1).charAt(0);
-        int second1 = Integer.toString(code1).charAt(1);
-        int third1 = Integer.toString(code1).charAt(2);
-        switch (number){
-            default:
-            case 5 : {
-                return (first%2==0) == (first1%2==0);
-            }
-            case 6 : {
-                return (second%2==0) == (second1%2==0);
-            }
-            case 7: {
-                return (third%2==0) == (third1%2==0);
-            }
+public class ValidatorEven extends ValidatorBool {
 
 
-        }
+
+    public ValidatorEven(int number) {
+        super(number);
+
     }
 
+    @Override
+    public boolean validate(Code secretCode, Code testCode) {
+        switch (number) {
+
+            case 5: {
+                return (secretCode.getIntPos(0) % 2 == 0) == (testCode.getIntPos(0) % 2 == 0);
+            }
+            case 6: {
+                return (secretCode.getIntPos(1) % 2 == 0) == (testCode.getIntPos(1) % 2 == 0);
+            }
+            case 7: {
+                return (secretCode.getIntPos(2) % 2 == 0) == (testCode.getIntPos(2) % 2 == 0);
+            }
+            default: {
+                throw new TuringException("Invalid Number Validator" + number);
+            }
+        }
+
+    }
 }

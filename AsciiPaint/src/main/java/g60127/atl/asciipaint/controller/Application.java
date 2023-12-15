@@ -24,20 +24,21 @@ public class Application {
         int height = View.readInt("Enter a height (between 1 and 199)", 1, 199);
         paint = new AsciiPaint(width, height);
         while (isStarted) {
-            String commandPattern =
-                    "(add)\s(circle|square)\s((1[0-9][0-9]|[1-9][0-9]|[0-9])\s){3}(.)"
-                            + "|(add)\s(rectangle|line)\s((1[0-9][0-9]|[1-9][0-9]|[0-9])\s){4}(.)"
-                            + "|(move)\s([0-9]|[0-9][0-9])\s(1[0-9][0-9]|[1-9][0-9]|[0-9])\s(1[0-9][0-9]|[1-9][0-9]|[0-9])"
-                            + "|(show)"
-                            + "|(list)"
-                            + "|(exit)"
-                            + "|(help)"
-                            + "|(undo)"
-                            + "|(redo)"
-                            + "|(delete)\s(1[0-9][0-9]|[1-9][0-9]|[0-9])"
-                            + "|(color)\s(1[0-9][0-9]|[1-9][0-9]|[0-9])\s(.)"
-                            + "|(group)\s((1[0-9][0-9]|[1-9][0-9]|[0-9])\s)+(1[0-9][0-9]|[1-9][0-9]|[0-9])"
-                            + "|(ungroup)\s(1[0-9][0-9]|[1-9][0-9]|[0-9])";
+            String commandPattern = """
+                            (add)\s(circle|square)\s((1[0-9][0-9]|[1-9][0-9]|[0-9])\s){3}(.)
+                            |(add)\s(rectangle|line)\s((1[0-9][0-9]|[1-9][0-9]|[0-9])\s){4}(.)
+                            |(move)\s([0-9]|[0-9][0-9])\s(1[0-9][0-9]|[1-9][0-9]|[0-9])\s(1[0-9][0-9]|[1-9][0-9]|[0-9])
+                            |(show)
+                            |(list)
+                            |(exit)
+                            |(help)
+                            |(undo)
+                            |(redo)
+                            |(delete)\s(1[0-9][0-9]|[1-9][0-9]|[0-9])
+                            |(color)\s(1[0-9][0-9]|[1-9][0-9]|[0-9])\s(.)
+                            |(group)\s((1[0-9][0-9]|[1-9][0-9]|[0-9])\s)+(1[0-9][0-9]|[1-9][0-9]|[0-9])
+                            |(ungroup)\s(1[0-9][0-9]|[1-9][0-9]|[0-9])
+                            """;
 
             Pattern pattern = Pattern.compile(commandPattern);
             Matcher matcher = pattern.matcher(View.readCommand(
