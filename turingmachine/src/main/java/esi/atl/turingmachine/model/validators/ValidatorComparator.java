@@ -5,16 +5,11 @@ import esi.atl.turingmachine.model.TuringException;
 
 public class ValidatorComparator extends ValidatorBool{
 
-
-
     public ValidatorComparator(int number){
         super(number);
-
-
     }
     @Override
     public boolean validate(Code secretCode, Code testCode) {
-
         switch (number){
             case 1 : {
                 return compare(secretCode.getIntPos(0), testCode.getIntPos(0), 1);
@@ -34,9 +29,7 @@ public class ValidatorComparator extends ValidatorBool{
             default : {
                 throw  new TuringException("Invalid Number Validator" + number);
             }
-
         }
-
     }
     private boolean compare(int a, int b, int comparator){
         return (((a == comparator) == (b == comparator))

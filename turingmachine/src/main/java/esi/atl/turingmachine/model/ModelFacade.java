@@ -2,32 +2,44 @@ package esi.atl.turingmachine.model;
 
 import esi.atl.turingmachine.commands.Command;
 import esi.atl.turingmachine.model.validators.Validator;
-import esi.atl.turingmachine.view.ViewConsole;
+import esi.atl.turingmachine.view.console.ViewConsole;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class ModelFacade {
     private static List<Command> history = new ArrayList<Command>();
     private static int actualUndoCommand = 0;
-    private List<Problem> problems = new ArrayList<Problem>();
+    private boolean gameStarted;
+    private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
+    private final List<Problem> problems = new ArrayList<Problem>();
     private Problem currentProblem;
 
-    private Game game;
+    private static Game game;
 
     public ModelFacade() {
         createKnownProblem();
+        gameStarted = false;
     }
 
     public void startGame() {
         game = new Game(currentProblem.getCode(), currentProblem.getValidatorNB());
+        gameStarted = true;
+        pcs.firePropertyChange("start", false, gameStarted);
+        pcs.firePropertyChange("validators", null, getValidator());
     }
 
     public void chooseProblem(int number) {
-        if (number == 0) number = (0 + (int) (Math.random() * ((15 - 0) + 1)));
-        currentProblem = problems.get(number);
+
+        if (number == 0) number = ((int) (Math.random() * ((16 - 1) + 1))+1);
+        currentProblem = problems.get(number-1);
+        startGame();
+    }
+    public boolean isGameStarted(){
+        return gameStarted;
     }
 
     public List<Problem> getProblems() {
@@ -49,20 +61,35 @@ public class ModelFacade {
     // return validator
     public void selectValidator(int i) {
         if (game.getCode() == null || game.getCode().getCode() == 000)
-            throw new TuringException("You must enter a code before");
+            throw new TuringException("You must enter a code before that");
         if (i >= game.getValidators().size() || i < 0)
             throw new TuringException("Invalid index Validator");
         game.selectValidator(i);
     }
-    public void removeLastValidator(){
+
+    public void removeLastValidator() {
         game.removeLastValidator();
     }
-    public void guessCode() {
 
+    public int getTotalRound() {
+        return game.getTotalRound();
+    }
+
+    public int getScoreValidator() {
+        return game.getTotalValidatorsUsed();
+    }
+
+    public boolean guessCode() {
+        //if (game.getCode() == null || game.getCode().getCode() == 000) throw new TuringException("You must enter a code before that");
+        gameStarted =false;
+        pcs.firePropertyChange("start", true, gameStarted);
+        //return game.getCode().getCode() == currentProblem.getCode().getCode();
+        return false;
     }
 
     public void giveUp() {
-
+        gameStarted=false;
+        pcs.firePropertyChange("start", true, gameStarted);
     }
 
 
@@ -106,6 +133,16 @@ public class ModelFacade {
             ViewConsole.displayError(e.getMessage());
         }
     }
+
+    /**
+     * method to add Observer (OO DP)
+     *
+     * @param observer
+     */
+    public void addObserver(PropertyChangeListener observer) {
+        pcs.addPropertyChangeListener(observer);
+    }
+
 
     /**
      * Create a list of Problem from the file known_problems.csv

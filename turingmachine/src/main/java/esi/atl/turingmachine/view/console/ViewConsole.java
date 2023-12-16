@@ -1,9 +1,10 @@
-package esi.atl.turingmachine.view;
+package esi.atl.turingmachine.view.console;
 
 
 import esi.atl.turingmachine.model.Problem;
 import esi.atl.turingmachine.model.validators.Validator;
 
+import javax.sound.midi.Soundbank;
 import java.util.List;
 import java.util.Scanner;
 
@@ -13,16 +14,29 @@ public class ViewConsole {
 
 
     public static void displayProblems(List<Problem> problems) {
-        for (int i = 0; i < problems.size(); i++) {
-            Problem problem = problems.get(i);
+        for (Problem problem : problems) {
             System.out.println(problem.getNum() + ": difficulty = "
                     + problem.getDifficulty() + " luck = " + problem.getLuck());
         }
 
     }
 
-    public static void displayScore(){
-
+    public static void displayScore(int validatorsTested, int rounds){
+        System.out.println();
+        System.out.println("Total Validators Tested: " + validatorsTested);
+        System.out.println("Round : " + rounds);
+        System.out.println();
+    }
+    public static void displayEnd(boolean won, int validatorsTested, int rounds){
+        if (won){
+            System.out.println();
+            System.out.println("Victory !");
+            displayScore(validatorsTested, rounds);
+        } else {
+            System.out.println();
+            System.out.println("Defeat..");
+            displayScore(validatorsTested, rounds);
+        }
     }
 
     public static void displayValidator(List<Validator> validators) {
@@ -49,47 +63,6 @@ public class ViewConsole {
                 + message + COLOR_RESET);
 
     }
-
-    /**
-     * Read an integer from input
-     *
-     * @param message to print in console
-     * @return
-     */
-    public static int readInt(String message) {
-        System.out.println();
-        Scanner s = new Scanner(System.in);
-        while (!s.hasNextInt()) {
-            System.out.println(message);
-            s.next();
-        }
-        return s.nextInt();
-    }
-
-    /**
-     * Read an integer from input between min and max
-     *
-     * @param message to print in console
-     * @param min     minimum
-     * @param max     maximum
-     * @return
-     */
-    public static int readInt(String message, int min, int max) {
-        System.out.println();
-        Scanner s = new Scanner(System.in);
-        System.out.println(message);
-        while (!s.hasNextInt()) {
-            System.out.println(message);
-            s.next();
-        }
-        int n = s.nextInt();
-        while (n < min || n > max) {
-            System.out.println("Enter an integer between " + min + " and " + max);
-            n = readInt(message, min, max);
-        }
-        return n;
-    }
-
 
     public static int readProblem(String message, int min, int max) {
         System.out.println();
@@ -128,17 +101,20 @@ public class ViewConsole {
      */
     public static void displayHelp() {
         System.out.println();
-        System.out.println("T U R I N G  M A C H I N E\n" +
-                "Turing Machine's commands:\n" +
-                "- Enter a code (3 digits between 1 - 5) : enter <code>\n" +
-                "- Select a validator : select <index>\n" +
-                "- display validator : list\n" +
-                "- Show all commands : help\n" +
-                "- Next round : next\n" +
-                "- Guess the code entered : guess\n" +
-                "- Undo a command (only enter and select): undo\n" +
-                "- Redo a command (only enter and select): redo\n" +
-                "- Stop the game : stop\n" +
-                "- Exit the program : exit");
+        System.out.println("""
+                T U R I N G  M A C H I N E
+                Turing Machine's commands:
+                - Enter a code (3 digits between 1 - 5) : enter <code>
+                - Select a validator : select <index>
+                - display validator : list
+                - Show all commands : help
+                - Next round : next
+                - Guess the code entered : guess
+                - Undo a command (only enter and select): undo
+                - Redo a command (only enter and select): redo
+                - Stop the game : stop
+                - Exit the program : exit
+                """);
+        System.out.println();
     }
 }

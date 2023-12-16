@@ -11,7 +11,6 @@ public class Round {
     public Round(){
 
     }
-
     public void useValidator(Validator validator){
         validators.add(validator);
 
