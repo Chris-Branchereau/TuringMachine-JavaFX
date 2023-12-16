@@ -12,7 +12,10 @@ public class ViewConsole {
     public static final String COLOR_RESET = "\u001B[0m";
     public static final String COLOR_RED = "\u001B[31m";
 
-
+    /**
+     * display the list of known problems (from known_problems.csv)
+     * @param problems list of problems
+     */
     public static void displayProblems(List<Problem> problems) {
         for (Problem problem : problems) {
             System.out.println(problem.getNum() + ": difficulty = "
@@ -21,12 +24,24 @@ public class ViewConsole {
 
     }
 
+    /**
+     * display the score (total of validator and rounds until now)
+     * @param validatorsTested total of validators tested
+     * @param rounds total of rounds
+     */
     public static void displayScore(int validatorsTested, int rounds){
         System.out.println();
         System.out.println("Total Validators Tested: " + validatorsTested);
         System.out.println("Round : " + rounds);
         System.out.println();
     }
+
+    /**
+     * display the end of the game (Victory or defeat)
+     * @param won = true if victory
+     * @param validatorsTested total of validator tested
+     * @param rounds total of rounds
+     */
     public static void displayEnd(boolean won, int validatorsTested, int rounds){
         if (won){
             System.out.println();
@@ -39,6 +54,10 @@ public class ViewConsole {
         }
     }
 
+    /**
+     * display the list of validator for the game (and if a validator is valid or not for this round)
+     * @param validators list of validator
+     */
     public static void displayValidator(List<Validator> validators) {
         System.out.println("List of Validator");
         for (int i = 0; i < validators.size(); i++) {
@@ -64,6 +83,13 @@ public class ViewConsole {
 
     }
 
+    /**
+     * read, from input, a integer between min and max to select a problem (or random)
+     * @param message message to print
+     * @param min minimum
+     * @param max maximum
+     * @return
+     */
     public static int readProblem(String message, int min, int max) {
         System.out.println();
         Scanner s = new Scanner(System.in);
@@ -82,6 +108,11 @@ public class ViewConsole {
         return n;
     }
 
+    /**
+     * read a command from input
+     * @param message to print
+     * @return
+     */
     public static String readCommand(String message) {
         System.out.println();
         Scanner s = new Scanner(System.in);
@@ -89,6 +120,10 @@ public class ViewConsole {
         return s.nextLine();
     }
 
+    /**
+     * method to display a message
+     * @param messages message to print
+     */
     public static void displayMessages(String... messages) {
         System.out.println();
         for (String message : messages) {

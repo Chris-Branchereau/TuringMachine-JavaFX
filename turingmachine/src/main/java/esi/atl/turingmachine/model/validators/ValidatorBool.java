@@ -1,5 +1,8 @@
 package esi.atl.turingmachine.model.validators;
 
+/**
+ * main method for validators
+ */
 public abstract class ValidatorBool implements Validator{
     private boolean isValid;
     private boolean isTested = false;

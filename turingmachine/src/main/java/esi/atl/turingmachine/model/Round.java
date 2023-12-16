@@ -5,6 +5,9 @@ import esi.atl.turingmachine.model.validators.Validator;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * defines a round
+ */
 public class Round {
     private Code currentCode;
     private List<Validator> validators = new ArrayList<Validator>();

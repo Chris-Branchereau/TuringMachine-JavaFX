@@ -1,5 +1,8 @@
 package esi.atl.turingmachine.model;
 
+/**
+ * Defines a Problem
+ */
 public class Problem {
     private int num;
     private int difficulty;
