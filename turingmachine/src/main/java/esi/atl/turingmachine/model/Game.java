@@ -62,6 +62,7 @@ public class Game {
                 validator.setTested(false);
             }
         }
+
     }
 
     /**
@@ -91,8 +92,8 @@ public class Game {
     /**
      * remove the last validator tested (called for undo command)
      */
-    public void removeLastValidator() {
-        currentRound.removeValidator();
+    public void  removeLastValidator() {
+        currentRound.removeLastValidator();
     }
 
     /**

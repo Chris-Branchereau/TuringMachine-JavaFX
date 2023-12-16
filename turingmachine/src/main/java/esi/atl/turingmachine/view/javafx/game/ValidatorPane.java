@@ -21,7 +21,7 @@ public class ValidatorPane extends VBox {
     private Button chooseB;
     private Validator validator;
     private ControllerJavaFX controller;
-    private String chooseBStyle = "-fx-background-radius: 10px; "+
+    private String chooseBStyle = "-fx-background-radius: 10px; " +
             "-fx-border-width: 5px; " +
             "-fx-border-radius: 8px; " +
             "-fx-text-decoration: none; " +
@@ -33,10 +33,10 @@ public class ValidatorPane extends VBox {
             + "-fx-border-color: #2DB563; " +
             "-fx-background-color: #ffffff; ";
 
-    private String chooseBValidStyle = chooseBStyle+
+    private String chooseBValidStyle = chooseBStyle +
             "-fx-border-color: #2DB563; " +
             "-fx-background-color: #2DB563; ";
-    private String chooseBNotValidStyle = chooseBStyle+
+    private String chooseBNotValidStyle = chooseBStyle +
             "-fx-border-color: #E13E2E; " +
             "-fx-background-color: #E13E2E; ";
 
@@ -58,25 +58,34 @@ public class ValidatorPane extends VBox {
         chooseB.setMinWidth(50);
         chooseB.setMinHeight(50);
         chooseB.setStyle(chooseBDefaultStyle);
-        chooseB.setOnAction( e -> testValidator(pos));
+        chooseB.setOnAction(e -> testValidator(pos));
 
         name = new Label(String.valueOf(abc.charAt(pos)));
         name.setStyle("-fx-text-fill: #2DB563");
         name.setFont(Font.loadFont(getClass().getResourceAsStream(
-                "/fonts/Turingmachinefont.otf"),48));
+                "/fonts/Turingmachinefont.otf"), 48));
         setAlignment(Pos.CENTER);
-        getChildren().addAll(imageRobotV, imageCardV,name, chooseB);
+        getChildren().addAll(imageRobotV, imageCardV, name, chooseB);
     }
-    public void testValidator(int pos){
+
+    public void testValidator(int pos) {
         controller.selectValidator(pos);
-        if (validator.isTested()){
-            if (validator.isValid()){
-                chooseB.setStyle(chooseBValidStyle);
-            } else {
-                chooseB.setStyle(chooseBNotValidStyle);
-            }
-        }else {
-            chooseB.setStyle(chooseBDefaultStyle);
+        if (validator.isTested())testedValidator();
+    }
+
+    public Validator getValidator() {
+        return validator;
+    }
+
+    public void testedValidator() {
+        if (validator.isValid()) {
+            chooseB.setStyle(chooseBValidStyle);
+        } else {
+            chooseB.setStyle(chooseBNotValidStyle);
         }
+    }
+
+    public void resetValidator() {
+        chooseB.setStyle(chooseBDefaultStyle);
     }
 }

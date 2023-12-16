@@ -16,12 +16,14 @@ public class CodeBox extends HBox {
     private ImageView imageV;
     private Image image;
     private String codeStyleB = "-fx-background-radius: 10px; " +
-            "-fx-background-color: #F5F4F6; " +
             "-fx-border-width: 5px; " +
             "-fx-border-radius: 8px; " +
             "-fx-text-decoration: none; " +
-            "-fx-cursor: hand; " +
-            "-fx-text-fill: #2DB563;";
+            "-fx-cursor: hand; ";
+    private String codeDefaultStyleB = "-fx-text-fill: #2DB563; " +
+            "-fx-background-color: #F5F4F6; " + codeStyleB;
+    private String codeSelectedStyleB = "-fx-text-fill: #ffffff; " +
+            "-fx-background-color: #2DB563; " + codeStyleB;
 
     public CodeBox(String name) {
         image = new Image(getClass().getResourceAsStream(
@@ -37,17 +39,29 @@ public class CodeBox extends HBox {
         setAlignment(Pos.CENTER);
         getChildren().addAll(imageV);
         for (Button b : digits) {
-            b.setStyle(codeStyleB);
+            b.setStyle(codeDefaultStyleB);
             b.setFont(Font.loadFont(getClass().getResourceAsStream(
                     "/fonts/Turingmachinefont.otf"), 50));
-            b.setOnAction(e -> selectDigit(b.getText()));
+            b.setOnAction(e -> selectDigit(b.getText(), b));
             getChildren().add(b);
         }
+
     }
-    private void selectDigit(String s){
+
+    public void resetCode() {
+        for (Button b : digits) {
+            b.setStyle(codeDefaultStyleB);
+            digit = 0;
+        }
+    }
+
+    private void selectDigit(String s, Button b) {
+        resetCode();
+        b.setStyle(codeSelectedStyleB);
         digit = Integer.parseInt(s);
     }
-    public int getDigit(){
+
+    public int getDigit() {
         return digit;
     }
 }

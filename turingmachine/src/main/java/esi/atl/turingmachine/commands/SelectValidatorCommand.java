@@ -15,8 +15,7 @@ public class SelectValidatorCommand extends TuringMachineCommand{
 
     @Override
     public void undo() {
-        model.getValidator().get(validatorNB).setTested(false);
-        model.removeLastValidator();
+        model.removeLastValidator(validatorNB);
     }
 
     @Override

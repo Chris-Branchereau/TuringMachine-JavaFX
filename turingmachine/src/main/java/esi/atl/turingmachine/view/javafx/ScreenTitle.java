@@ -15,13 +15,19 @@ public class ScreenTitle extends VBox {
     private ControllerJavaFX controller;
     public ScreenTitle(int gap, ControllerJavaFX controller){
         super(gap);
+        this.controller = controller;
+
         problemsCB = new ComboBox<>();
         title = new Label("Turing Machine");
         startB = new Button("Start");
-        this.controller = controller;
+
+        title.setStyle("-fx-font-size: 150px; -fx-text-fill: #2DB563;");
+
         problemsCB.setItems(controller.getProblemsList());
+        problemsCB.setStyle("-fx-font-size: 15px;");
 
         startB.setOnAction(e -> chooseProblem());
+        startB.setStyle("-fx-font-size: 35px; -fx-background-color:  #2DB563; -fx-text-fill: #ffffff; -fx-cursor: hand;");
 
         setAlignment(Pos.CENTER);
         getChildren().addAll(title, problemsCB, startB);

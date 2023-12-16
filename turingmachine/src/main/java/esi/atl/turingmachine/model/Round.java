@@ -18,8 +18,9 @@ public class Round {
         validators.add(validator);
 
     }
-    public void removeValidator(){
-        validators.remove(validators.size()-1);
+    public void removeLastValidator(){
+        validators.get(validatorsSize()-1).setTested(false);
+        validators.remove(validatorsSize()-1);
     }
     public int validatorsSize(){
         return validators.size();
