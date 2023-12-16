@@ -8,7 +8,14 @@ public class ValidatorComparator2 extends ValidatorBool {
     public ValidatorComparator2(int number) {
         super(number);
     }
-
+    /**
+     * Validates the comparison of two 2 codes
+     *
+     * @param secretCode The Code instance containing the secret values.
+     * @param testCode   The Code instance containing the values to be tested.
+     * @return true if the comparison is successful, false otherwise.
+     * @throws TuringException If the validator number is invalid.
+     */
     @Override
     public boolean validate(Code secretCode, Code testCode) {
         switch (number) {
@@ -26,6 +33,15 @@ public class ValidatorComparator2 extends ValidatorBool {
             }
         }
     }
+    /**
+     * Compares two integers based on two specified comparators.
+     *
+     * @param a           The first integer.
+     * @param b           The second integer.
+     * @param comparatorA The comparator value for the first comparison.
+     * @param comparatorB The comparator value for the second comparison.
+     * @return true if both comparisons are successful, false otherwise.
+     */
 
     private boolean compare(int a, int b, int comparatorA, int comparatorB) {
         return ((a == comparatorA) == (b == comparatorB))

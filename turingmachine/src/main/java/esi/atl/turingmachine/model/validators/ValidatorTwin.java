@@ -10,7 +10,14 @@ public class ValidatorTwin extends ValidatorBool {
         super(number);
 
     }
-
+    /**
+     * Validates the comparison of two 2 codes
+     *
+     * @param secretCode The Code instance containing the secret values.
+     * @param testCode   The Code instance containing the values to be tested.
+     * @return true if the comparison is successful, false otherwise.
+     * @throws TuringException If the validator number is invalid.
+     */
     @Override
     public boolean validate(Code secretCode, Code testCode) {
         int counter = 0;

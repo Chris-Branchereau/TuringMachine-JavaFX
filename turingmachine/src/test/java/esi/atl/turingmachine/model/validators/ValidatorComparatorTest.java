@@ -1,62 +1,51 @@
 package esi.atl.turingmachine.model.validators;
 
+import esi.atl.turingmachine.model.Code;
+import esi.atl.turingmachine.model.TuringException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 class ValidatorComparatorTest {
-/*
+
     @Test
-    public void compare1To4(){
-        ValidatorComparator v1 = new ValidatorComparator();
-        v1.setCode(241);
+    void validateCompararator1() throws TuringException {
+        ValidatorComparator validator = new ValidatorComparator(1);
+        Code code = new Code(123);
+        assertTrue(validator.validate(code, new Code(123)));
+        assertFalse(validator.validate(code, new Code(451)));
+    }
 
-        v1.setNumber(1);
-        boolean test1 = v1.validate( 463);
+    @Test
+    void validateCompararator2() throws TuringException {
+        ValidatorComparator validator = new ValidatorComparator(2);
+        Code code = new Code(123);
+        assertTrue(validator.validate(code, new Code(123)));
+        assertFalse(validator.validate(code, new Code(424)));
+        assertFalse(validator.validate(code, new Code(324)));
+    }
 
-        v1.setNumber(2);
-        boolean test2 = v1.validate( 463);
-
-        v1.setNumber(3);
-        boolean test3 = v1.validate( 463);
-
-        v1.setNumber(4);
-        boolean test4 = v1.validate( 463);
-        assertEquals(true, test1);
-        assertEquals(false, test2);
-        assertEquals(true, test3);
-        assertEquals(false, test4);
-//
+    @Test
+    void validateCompararator3() throws TuringException {
+        ValidatorComparator validator = new ValidatorComparator(3);
+        Code code = new Code(444);
+        assertTrue(validator.validate(code, new Code(555)));
+        assertFalse(validator.validate(code, new Code(132)));
+        assertFalse(validator.validate(code, new Code(421)));
     }
     @Test
-    public void compare11To13(){
-        ValidatorComparator v1 = new ValidatorComparator();
-        v1.setCode(241);
-
-        v1.setNumber(11);
-        boolean test1 = v1.validate( 413);
-
-        v1.setNumber(12);
-        boolean test2 = v1.validate( 413);
-
-        v1.setNumber(13);
-        boolean test3 = v1.validate( 413);
-
-
-        assertEquals(false, test1);
-        assertEquals(true, test2);
-        assertEquals(false, test3);
-
+    void validateCompararator4() throws TuringException {
+        ValidatorComparator validator = new ValidatorComparator(4);
+        Code code = new Code(444);
+        assertTrue(validator.validate(code, new Code(541)));
+        assertFalse(validator.validate(code, new Code(132)));
+        assertFalse(validator.validate(code, new Code(152)));
     }
     @Test
-    public void compare19(){
-        ValidatorComparator v1 = new ValidatorComparator();
-        v1.setCode(241);
-
-        v1.setNumber(19);
-        boolean test1 = v1.validate( 413);
-
-        assertEquals(false, test1);
+    void validateCompararator19() throws TuringException {
+        ValidatorComparator validator = new ValidatorComparator(19);
+        Code code = new Code(444);
+        assertTrue(validator.validate(code, new Code(541)));
+        assertFalse(validator.validate(code, new Code(132)));
+        assertFalse(validator.validate(code, new Code(152)));
     }
-*/
-  
 }

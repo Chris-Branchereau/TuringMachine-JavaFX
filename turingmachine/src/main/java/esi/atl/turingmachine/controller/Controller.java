@@ -6,7 +6,9 @@ import esi.atl.turingmachine.model.ModelFacade;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-
+/**
+ * abstract class for controller
+ */
 public abstract class Controller {
 
     protected final ModelFacade model;

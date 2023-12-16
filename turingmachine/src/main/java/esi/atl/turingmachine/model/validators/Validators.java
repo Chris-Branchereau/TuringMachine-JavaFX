@@ -5,7 +5,11 @@ import esi.atl.turingmachine.model.TuringException;
 
 public abstract class Validators {
 
-
+    /**
+     * select validator from his number
+     * @param number
+     * @return
+     */
     public static Validator getValidator(int number) {
         switch (number) {
             case 1:
