@@ -38,6 +38,7 @@ public class ControllerJavaFX extends Controller {
         view.view(stage);
         model.addObserver(view);
         model.addObserver(view.getGameScene());
+        model.addObserver(view.getGameScene2());
     }
 
     /**

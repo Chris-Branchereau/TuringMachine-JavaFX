@@ -216,7 +216,6 @@ public class GameScene extends GridPane implements PropertyChangeListener {
             }
             case "undo" -> {
                 undoB.setDisable(!(boolean) e.getNewValue());
-
             }
             case "redo" -> {
                 redoB.setDisable(!(boolean) e.getNewValue());
