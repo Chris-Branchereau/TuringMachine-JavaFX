@@ -20,11 +20,15 @@ public class ValidatorComparator extends ValidatorBool{
     @Override
     public boolean validate(Code secretCode, Code testCode) {
         switch (number){
+            // @pbt don't use switch in validate but in constructor
             case 1 : {
-                return compare(secretCode.getIntPos(0), testCode.getIntPos(0), 1);
+                return compare(secretCode.getIntPos(0),
+                        testCode.getIntPos(0), 1);
             }
+            // @pbt long lines
             case 2 : {
-                return compare(secretCode.getIntPos(0),testCode.getIntPos(0),3);
+                return compare(secretCode.getIntPos(0),
+                        testCode.getIntPos(0),3);
             }
             case 3: {
                 return compare(secretCode.getIntPos(1),testCode.getIntPos(1), 3);

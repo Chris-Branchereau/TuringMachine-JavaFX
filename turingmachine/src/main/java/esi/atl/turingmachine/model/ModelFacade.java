@@ -36,6 +36,7 @@ public class ModelFacade {
     public void startGame() {
         game = new Game(currentProblem.getCode(), currentProblem.getValidatorNB());
         gameStarted = true;
+        // @pbt use final const static string instead of literal string
         pcs.firePropertyChange("start", false, gameStarted);
         pcs.firePropertyChange("validators", null, getValidator());
     }
